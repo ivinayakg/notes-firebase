@@ -1,0 +1,81 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.8rem;
+  background-color: var(--paper-color);
+  border-radius: 8px;
+  gap: 10px;
+  height: min-content;
+  flex-grow: 1;
+  width: 100%;
+  transition: 250ms ease-in-out;
+}
+
+.main_exit {
+  opacity: 0;
+  transform: translateX(500px);
+  visibility: hidden;
+}
+
+.title {
+  font-size: 0.9rem;
+}
+
+.note {
+  font-size: 0.8rem;
+  height: max-content;
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.tag {
+  background-color: var(--tags-color);
+  padding: 5px;
+  font-size: 0.65rem;
+  border-radius: 10px;
+}
+
+.extras {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.restore {
+  margin-left: auto;
+}
+
+.trash,
+.restore {
+  padding: 0;
+  border: none;
+  margin-right: 1rem;
+}
+
+button.trash svg,
+button.restore svg {
+  width: 27px;
+}
+
+.colorBox {
+  width: 25px;
+  background-color: var(--background-color);
+  border: solid 2px gray;
+  margin-right: 1rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.extras svg {
+  width: 25px;
+}

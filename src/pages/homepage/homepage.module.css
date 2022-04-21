@@ -1,0 +1,18 @@
+.addForm {
+  padding: 0px;
+  position: fixed;
+  bottom: 4rem;
+  right: 1rem;
+  border: none;
+  background-color: transparent;
+  line-height: 0px;
+}
+
+.addForm svg {
+  color: var(--primary-color);
+  width: 40px;
+}
+
+.addForm_active {
+  transform: rotateZ(135deg);
+}

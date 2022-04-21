@@ -1,0 +1,139 @@
+.main {
+  padding: 10px;
+  position: fixed;
+  top: 0px;
+  background-color: var(--background-color);
+  width: 100vw;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  left: 100%;
+  transition: ease-in-out 500ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.main_active {
+  top: 0px;
+  /* animation: mainAnimationEntry 500ms ease-in-out both; */
+  left: 1px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 4px;
+}
+
+button.btn {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  color: var(--primary-color);
+}
+.btn svg {
+  width: 25px;
+}
+
+.btn span {
+  display: none;
+}
+
+.starBtn,
+.colorBtn {
+  margin-right: 1rem;
+}
+
+.colorBox {
+  margin-left: auto;
+  height: 30px;
+  background-color: transparent;
+  border: solid 2px gray;
+  margin-right: 1rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.colorList {
+  position: relative;
+}
+
+.colorListWrap {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  top: -500px;
+  left: -1px;
+  transition: 500ms ease-in-out;
+}
+
+.colorListWrap_active {
+  visibility: visible;
+  opacity: 1;
+  top: 35px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  width: 100%;
+}
+
+.input {
+  flex-grow: 1;
+  padding: 9px;
+  background-color: transparent;
+  width: 100%;
+  letter-spacing: 1px;
+  min-height: max-content;
+  border: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputTitle {
+  font-size: 1.75rem;
+  border-bottom: solid 1px var(--para-color);
+  color: var(--title-color);
+  line-height: 2.2rem;
+}
+
+textarea.inputNote {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--para-color);
+  font-weight: 300;
+  line-height: 2rem;
+  min-height: 75vh;
+  height: max-content;
+}
+
+textarea.inputTags {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--para-color);
+  font-weight: 300;
+}
+
+@keyframes mainAnimationEntry {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 1px;
+    visibility: visible;
+    opacity: 1;
+  }
+}

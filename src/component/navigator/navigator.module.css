@@ -1,0 +1,29 @@
+.nav {
+  width: 100vw;
+  position: fixed;
+  bottom: 0px;
+  height: var(--navigator-height);
+  background-color: var(--background-color);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--navigator-color);
+  border-radius: 12px 12px 0px 0px;
+}
+
+button.btn {
+  flex-grow: 1;
+  background-color: transparent;
+  border-radius: 0px;
+}
+
+button.btn:not(:last-of-type) {
+  border-right: solid 1px var(--primary-color);
+}
+
+.btn svg {
+  width: 30px;
+}

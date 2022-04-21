@@ -1,0 +1,10 @@
+.main {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  padding-bottom: calc(var(--navigator-height) + 1rem);
+  transition: 300ms ease-in-out;
+  overflow-x: hidden;
+}
