@@ -1,9 +1,9 @@
 import {
   getAuth,
-  signInWithPopup,
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
+  signInWithRedirect,
 } from "firebase/auth";
 import { createUser } from "./firestore";
 
@@ -11,12 +11,9 @@ const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
 
-export const LoginWithGoogle = async (navigate) => {
+export const LoginWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, provider);
-    await createUser(result.user);
-    localStorage.setItem("userId", result.user.uid);
-    navigate("/home");
+    await signInWithRedirect(auth, provider);
   } catch (error) {
     console.error(error);
   }
@@ -32,9 +29,12 @@ export const signOutHandler = () => {
     });
 };
 
-export const AuthChecker = (dispatch) => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) dispatch({ type: "AUTH", payload: true });
-    else dispatch({ type: "AUTH", payload: false });
+export const AuthChecker = (cb, failcb) => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      localStorage.setItem("userId", user.uid);
+      await createUser(user);
+      cb();
+    } else failcb();
   });
 };

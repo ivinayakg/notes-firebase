@@ -1,4 +1,5 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/themeContext";
 import { LoginWithGoogle } from "../../firebase";
@@ -6,6 +7,7 @@ import classes from "./landingpage.module.css";
 
 const LandingPage = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isMobile, setIsMobile] = useState(true);
   const navigate = useNavigate();
 
   return (
@@ -27,10 +29,10 @@ const LandingPage = () => {
           </p>
           <button
             className={classes.btn + " btn-pri"}
-            onClick={() => LoginWithGoogle(navigate)}
+            onClick={() => LoginWithGoogle(navigate, isMobile)}
           >
             Login With Google{" "}
-            <img src="/assets/google.svg" className={classes.btnImg} />
+            <img src="/assets/google.svg" className={classes.btnImg} alt="" />
           </button>
         </span>
       </div>

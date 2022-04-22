@@ -23,11 +23,30 @@ export const createUser = async (data) => {
       name: data.displayName,
       photoUrl: data.reloadUserInfo.photoUrl,
     });
+    // await setDoc(doc(db, "accounts", data.uid, "notes", uuid()), {
+    //   title: "Welcome To Remeber Me",
+    //   note: "This is your first Note",
+    //   color: "default",
+    //   tags: [],
+    //   star: false,
+    //   draft: false,
+    //   timestamp: serverTimestamp(),
+    // });
+    // await setDoc(doc(db, "accounts", data.uid, "notesTrash", uuid()), {
+    //   title: "Welcome To Remeber Me",
+    //   note: "This is your first Trash Note",
+    //   color: "default",
+    //   tags: [],
+    //   star: false,
+    //   draft: false,
+    //   timestamp: serverTimestamp(),
+    // });
   }
 };
 
 const addData = async (type, data) => {
   let userId = localStorage.getItem("userId");
+
   await setDoc(doc(db, "accounts", userId, type, uuid()), {
     ...data,
     timestamp: serverTimestamp(),
@@ -48,7 +67,10 @@ const updateData = async (type, data) => {
 
 const getDataRealtime = (dispatch, collectionName) => {
   let userId = localStorage.getItem("userId");
-  const notesCollection = collection(db, "accounts", userId, collectionName);
+  const notesCollection = collection(
+    db,
+    `accounts/${userId}/${collectionName}`
+  );
   onSnapshot(notesCollection, (data) => {
     let dataArray = data.docs.map((item) => ({
       ...item.data(),

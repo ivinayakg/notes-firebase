@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useTheme } from "../../context/themeContext";
+import { signOutHandler } from "../../firebase/authentication";
 import { LogoutIcon, MoonIcon, SearchIcon, SunIcon, XIcon } from "../icons";
 import classes from "./searchComp.module.css";
 
@@ -15,7 +16,10 @@ const SearchComp = ({ toggleSearch, search, onSearchHandler }) => {
   return (
     <nav className={classes.main}>
       <div className={classes.wrapper}>
-        <button className={classes.logout + " btn-pri"}>
+        <button
+          className={classes.logout + " btn-pri"}
+          onClick={signOutHandler}
+        >
           <LogoutIcon />
         </button>
         <button className={classes.search + " btn-pri"} onClick={toggleSearch}>

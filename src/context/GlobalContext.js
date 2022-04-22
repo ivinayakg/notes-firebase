@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import { APIcalls, AuthChecker } from "../firebase";
 import { notesReducer } from "../reducer";
 
@@ -8,18 +9,20 @@ const GlobalContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(notesReducer, {
     notes: [],
     notesTrash: [],
-    isAuth: false,
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (state.isAuth) {
-      APIcalls.getDataRealtime(dispatch, "notes");
-      APIcalls.getDataRealtime(dispatch, "notesTrash");
-    }
-  }, [state.isAuth]);
-
-  useEffect(() => {
-    AuthChecker(dispatch);
+    AuthChecker(
+      () => {
+        APIcalls.getDataRealtime(dispatch, "notes");
+        APIcalls.getDataRealtime(dispatch, "notesTrash");
+        navigate("/home");
+      },
+      () => {
+        navigate("/");
+      }
+    );
   }, []);
 
   return (
