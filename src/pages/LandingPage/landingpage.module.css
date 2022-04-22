@@ -1,0 +1,68 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.2rem;
+  gap: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header h2 {
+  align-self: flex-start;
+  text-transform: uppercase;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.img {
+  margin-top: 2rem;
+  max-width: 100vw;
+  width: 70%;
+  overflow: hidden;
+  border: none;
+  object-fit: contain;
+  align-self: center;
+}
+
+.CTA {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.para {
+  text-transform: capitalize;
+  text-align: justify;
+  font-size: 1rem;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+button.theme {
+  background-color: transparent;
+  padding: 0px;
+}
+
+.theme svg {
+  width: 25px;
+}

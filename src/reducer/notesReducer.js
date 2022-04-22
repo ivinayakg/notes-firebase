@@ -1,28 +1,10 @@
-const branchMapper = {
-  notes: "notes",
-  trash: "notesTrash",
-};
-
 export const notesReducer = (state, action) => {
   const { type, payload, branch } = action;
-  let currentBranch = state[branchMapper[branch]];
   switch (type) {
-    case "ADD":
-      return { ...state, [branchMapper[branch]]: [...currentBranch, payload] };
-    case "REMOVE":
-      return {
-        ...state,
-        [branchMapper[branch]]: currentBranch.filter(
-          (entry) => entry._id !== payload._id
-        ),
-      };
-    case "UPDATE":
-      return {
-        ...state,
-        [branchMapper[branch]]: currentBranch.map((entry) =>
-          entry._id === payload._id ? payload : entry
-        ),
-      };
+    case "UPDATE_STATE_SNAPSHOT":
+      return { ...state, [branch]: payload };
+    case "AUTH":
+      return { ...state, isAuth: payload };
     default:
       return state;
   }

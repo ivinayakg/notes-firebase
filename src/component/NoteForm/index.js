@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
-import { v4 as uuid } from "uuid";
 import { useGlobalContext } from "../../context/GlobalContext";
+import { APIcalls } from "../../firebase";
 import { increaseHeightTextarea } from "../../utils";
 import {
   ArrowLeftIcon,
@@ -34,7 +34,7 @@ const NoteForm = ({ closeModal, showModal, isMobile }) => {
     star: false,
     draft: false,
   });
-  const { dispatch, state } = useGlobalContext();
+  const { state } = useGlobalContext();
 
   //get the note which has to updated if opened a particular note
   const { noteId } = useParams();
@@ -47,12 +47,7 @@ const NoteForm = ({ closeModal, showModal, isMobile }) => {
   //this is when you click on the submit button
   const submitFormHandler = () => {
     if (formData.note !== "None") {
-      dispatch({
-        for: "notes",
-        type: "ADD",
-        branch: "notes",
-        payload: { ...formData, _id: uuid() },
-      });
+      APIcalls.addData("notes", { ...formData });
       closeModal();
       setFormData({
         title: "Untitled",
@@ -70,19 +65,13 @@ const NoteForm = ({ closeModal, showModal, isMobile }) => {
 
   useEffect(() => {
     if (!showModal && formData.note !== "None" && !formData._id) {
-      dispatch({
-        for: "notes",
-        type: "ADD",
-        branch: "notes",
-        payload: {
-          ...formData,
-          _id: uuid(),
-          tags: [...formData.tags, "draft"],
-          draft: true,
-        },
+      APIcalls.addData("notes", {
+        ...formData,
+        tags: [...formData.tags, "draft"],
+        draft: true,
       });
     }
-  }, [showModal, dispatch, formData]);
+  }, [showModal, formData]);
 
   //reset the formdata when the modal is close and opened
   useEffect(() => {
@@ -102,15 +91,10 @@ const NoteForm = ({ closeModal, showModal, isMobile }) => {
   }, [showModal, thisNote]);
 
   const updateNote = () => {
-    dispatch({
-      for: "notes",
-      type: "UPDATE",
-      branch: "notes",
-      payload: {
-        ...formData,
-        draft: false,
-        tags: formData.tags.filter((tag) => tag !== "draft"),
-      },
+    APIcalls.updateData("notes", {
+      ...formData,
+      draft: false,
+      tags: formData.tags.filter((tag) => tag !== "draft"),
     });
     closeModal();
     setFormData({

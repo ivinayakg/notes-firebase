@@ -76,7 +76,10 @@ const Homepage = () => {
           closeModal={closeModalForm}
           isMobile={homeState.isMobile}
         />
-        <NotesContainer dataArray={FilteredNotes} />
+        <NotesContainer
+          dataArray={FilteredNotes}
+          isMobile={homeState.isMobile}
+        />
         <Navigator />
       </div>
     </>

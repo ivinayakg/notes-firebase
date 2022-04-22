@@ -1,48 +1,29 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/GlobalContext";
+import { APIcalls } from "../../firebase";
 import { RestoreIcon, StarIcon, StarOutlinedIcon, TrashIcon } from "../icons";
 import classes from "./notecard.module.css";
 
 const NoteCard = ({ data }) => {
   const [exit, setExit] = useState(false);
-  const { dispatch } = useGlobalContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const deleteNoteHandler = () => {
     setExit(true);
     setTimeout(() => {
-      dispatch({
-        for: "notes",
-        type: "REMOVE",
-        branch: pathname === "/home/trash" ? "trash" : "notes",
-        payload: data,
-      });
-      if (pathname !== "/home/trash")
-        dispatch({
-          for: "notes",
-          type: "ADD",
-          branch: "trash",
-          payload: data,
-        });
+      APIcalls.deleteData(
+        pathname === "/home/trash" ? "notesTrash" : "notes",
+        data
+      );
+      if (pathname !== "/home/trash") APIcalls.addData("notesTrash", data);
     }, 300);
   };
   const restoreNoteHandler = () => {
     setExit(true);
     setTimeout(() => {
-      dispatch({
-        for: "notes",
-        type: "REMOVE",
-        branch: "trash",
-        payload: data,
-      });
-      dispatch({
-        for: "notes",
-        type: "ADD",
-        branch: "notes",
-        payload: data,
-      });
+      APIcalls.deleteData("notesTrash", data);
+      APIcalls.addData("notes", data);
     }, 300);
   };
 

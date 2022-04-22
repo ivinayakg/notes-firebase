@@ -7,4 +7,10 @@
   padding-bottom: calc(var(--navigator-height) + 1rem);
   transition: 300ms ease-in-out;
   overflow-x: hidden;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.main::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
